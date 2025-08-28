@@ -1,36 +1,44 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+##### SETUP Instructions ###
+1) set up the database by using: npm run db:setup
+2) run : npm run dev
 
-## Getting Started
+###### Tech Stack #######
+Frontend: Next.js 13+ with TypeScript and Tailwind CSS
+Backend: Next.js API Routes with TypeScript
+Database: SQLite with raw SQL queries
+Authentication: JWT tokens with bcrypt password hashing
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+##### Database Schema ######
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The application uses a simplified single-table approach for survey data:
+1) Users Table
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Stores user account information
+JWT authentication with bcrypt password hashing
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+2) Survey Responses Table
 
-## Learn More
+Single table containing all survey data (demographics, health, financial)
+Linked to users via foreign key relationship
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Design Decisions ###
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1) SQLite Database
+SQLite was chosen for this assignment to ensure evaluators can run the application immediately with a simple npm run db:setup command. 
+This eliminates external dependencies, Docker requirements, or cloud service account creation while still providing a full SQL relational database with proper relationships and constraints.
 
-## Deploy on Vercel
+2) Single Table Survey Design
+The survey data is stored in a single table rather than separate tables for each section. This design choice prioritizes development speed and simplicity while maintaining data integrity through proper typing and validation.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Future Improvements ###
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+With additional development time, the following enhancements could be implemented:
+
+1) Global state management with Zustand or Redux
+2) React Query for server state management
+3) Enhanced form validation 
+4) Comprehensive error boundaries
+5) Migration to PostgreSQL for production
+
